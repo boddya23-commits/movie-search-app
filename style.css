@@ -1,0 +1,342 @@
+
+
+:root { 
+  /* Color Tokens */
+  --bg-color: #161826;
+  --card-surface: #232532;
+  --surface-raised: #292b31;
+
+  /* Typography Colors */
+  --text-primary: #e9e9ed;
+  --text-secondary: #9397ab;
+  --text-tertiary: #75798c;
+
+  /* Accent & Interactive */
+  --accent: #9184d9;
+  --accent-light: #b5abfc;
+  --accent-tint: #2b2741;
+
+  /* Borders & Features */
+  --border-color: #3f424d;
+  --feature-ground: #262a60;
+
+  /* Elevations (Borders + Shadows) */
+  --elevation-card: 0 0 0 1px var(--border-color);
+  --elevation-dropdown: 0 0 0 1px #595d6c, 0 6px 18px rgba(0, 0, 0, 0.55);
+  --elevation-modal: 0 0 0 1px var(--text-secondary), 0 16px 40px rgba(0, 0, 0, 0.65);
+
+  /* Layout Dimensions */
+  --header-height: 72px;
+  --search-input-w: 720px;
+  --search-input-h: 56px;
+  --modal-max-w: 880px;
+
+  /* Card Dimensions */
+  --card-media-height: 270px;
+  --card-info-height: 76px;
+  --card-total-height: 346px;
+
+  /* Default Grid System (≥1440px) */
+  --grid-cols: 6;
+  --grid-gap-x: 24px;
+  --grid-gap-y: 40px;
+  --page-gutter: 50px;
+
+  /* Spacing System */
+  --space-hero-pt: 56px;
+  --space-hero-pb: 32px;
+  --space-filter-pb: 28px;
+  --space-meta-pb: 16px;
+  --space-loadmore-mt: 48px;
+
+  /* Overlays */
+  --color-backdrop: rgba(22, 24, 38, 0.72);
+
+      --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 56px;
+}
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+}
+body {
+    background-color: var(--bg-color);
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    color: var(--text-primary);
+}
+.container {
+    padding: 0 var(--page-gutter);
+}
+header { 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 var(--page-gutter);
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 3000000;
+    background-color: var(--surface-raised);
+    border-bottom: 2px solid var(--border-color);
+    height: var(--header-height);
+}
+.logo {
+    font-weight: 500;
+    color: var(--text-secondary);
+    span {
+        color: var(--text-primary);
+    }
+}
+header ul {
+        list-style: none;
+        display: flex;
+        gap: var(--space-filter-pb);
+        color: var(--text-secondary);
+            li {
+        cursor: pointer;
+            }
+    }
+.search{
+  padding: var(--space-hero-pt) 0 var(--space-hero-pb);
+  display: flex;
+  position: relative;
+  flex-direction: column;
+}
+.search h1 { 
+  margin-bottom: var(--space-sm);
+  color: var(--text-primary);
+}
+.search input{ 
+    width: var(--search-input-w);
+    height: var(--search-input-h);
+    border-radius: 5px;
+    border: 2px solid var(--border-color);
+    /* margin-bottom: var(--space-sm); */
+    background-color: var(--card-surface);
+    color: var(--text-secondary);
+    font-size: 17px;
+    padding: 15px;
+}
+.search input:hover ,
+.search input:focus {
+  border: 1px solid var(--accent);
+}
+.search-box { 
+  position: relative;
+}
+.search .dropdown { 
+  max-height: calc( 44px * 6 + var(--space-sm)*2);
+  /* height: var(--elevation-dropdown); */
+  width: var(--search-input-w);
+  background-color: var(--surface-raised);
+  border-radius: 5px;
+  position: absolute;
+  top: calc( 100% + 6px);
+  opacity: 0.9;
+  overflow-y: auto;
+  padding: 0;
+  border: none;
+  z-index: 20000;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+
+  /* display: none; */
+}
+.search .dropdown:has(.result) {
+  padding: var(--space-sm);
+  border: 1px solid var(--border-color);
+}
+.search .dropdown .result {
+  height: 44px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+}
+.search .dropdown .result img {
+  width: 40px;
+  height: 40px;
+}
+.search .dropdown .result .years { 
+  font-size: 14px;
+
+}
+
+.search .dropdown .result:hover { 
+  background-color: var(--accent-tint);
+
+}
+
+
+
+/* 2. تصميم شكل السكرول بار (Custom Scrollbar) */
+.search .dropdown::-webkit-scrollbar {
+  width: 6px; /* عرض السكرول بار */
+}
+
+.search .dropdown::-webkit-scrollbar-track {
+  background: transparent; /* خلفية المسار شفافة */
+}
+
+.search .dropdown::-webkit-scrollbar-thumb {
+  background-color: var(--border-color); /* لون مقبض السكرول */
+  border-radius: 10px;
+}
+
+.search .dropdown::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-tertiary); /* لونه لما تقف عليه بالموس */
+}
+
+.filter-row { 
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    border-top: 1px solid var(--border-color);
+    margin-bottom: var(--space-filter-pb); }
+
+.filter-row .container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%;
+    height: 36px;
+    padding: 28px var(--page-gutter);
+    position: relative; 
+}
+
+.filter-row .container ul.pills {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.filter-row .container ul.pills li {
+    padding: 6px 16px;
+    background-color: var(--card-surface);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-row .container ul.pills li:hover,
+.filter-row .container ul.pills li.active {
+    background-color: var(--accent-tint);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+.filter-row .container .sortdrop {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 6px);
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--elevation-dropdown);
+    list-style: none;
+    display: none; 
+    z-index: 10;
+}
+
+.movies-grid { 
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: 24px;
+  row-gap: 40px;
+}
+
+.movie-card { 
+  height: var(--card-total-height); 
+  background-color: var(--card-surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-color); 
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  img {
+    height: 100%;
+  }
+}
+
+.movie-card:hover,
+.movie-card:active { 
+  background-color: var(--accent-tint);
+  border-color: var(--accent);
+  color: var(--text-primary);
+  transform: translateY(-4px); 
+}
+ .movie-name { 
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 10px
+}
+.container-add { 
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add-more { 
+    width: 100px;
+    height: 28px;
+    cursor: pointer;
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: var(--elevation-dropdown);
+    color: var(--text-secondary);
+}
+
+.add-more:hover {
+    background-color: var(--accent-tint);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+
+
+@media (max-width: 1439px) {
+  :root {
+    --grid-cols: 5;
+    --page-gutter: 64px;
+  }
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --grid-cols: 4;
+    --page-gutter: 40px;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --grid-cols: 3;
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --grid-cols: 2;
+    --page-gutter: 20px;
+    --grid-gap-x: 16px;
+  }
+}

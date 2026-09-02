@@ -4,8 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>movie search</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
+    
+    <header> 
+        <h1 class="logo"><span class="logo-primary">mogo</span> movie</h1>
+        <ul class="nav">
+            <li>one</li>
+            <li>two </li>
+            <li>three</li>
+        </ul>
+    </header>
+    <div class="container">
+        <section class="search">
+            <h1>Search movies</h1>
+            <div class="search-box">
+                <input type="text"  placeholder="Search for a movie..." id="input">
+                <div class="dropdown" >
+                    <!-- <div class="result"> 
+                        <img src="img/greenMile.jpeg" alt="">
+                        <p class="moive-name">green mile</p>
+                        <div class="years"> (1999)</div>
+                    </div> -->
+                </div>   
+            </div>
+        </section>
+    </div>
+
+        <section class="filter-row">
+            <div class="container">
+                <ul class="pills">
+                    <li>All</li>
+                    <li>Action</li>
+                    <li>Comedy</li>
+                    <li>Drama</li>
+                    <li>Horror</li>
+                    <li>Sci-Fi</li>
+                    <li>Romance</li>
+                </ul>
+                <div class="sort"></div>
+                <ul class="sortdrop">
+                </ul>
+            </div>
+        </section>
+    <div class="container movie-container">
+        <section class="movies-grid">
+            <div class="movie-item">
+    <div class="movie-card">
+        <img src="img/greenMile.jpeg" alt="The Green Mile">
+    </div>
+    <h3 class="movie-name">The Green Mile</h3>
+</div>
+        </section>
+        </div>
+        <div class="container-add">
+            <button class="add-more">add more</button>
+        </div>
     
     <script src="script.js"></script>
 </body>
