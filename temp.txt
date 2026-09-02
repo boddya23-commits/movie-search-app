@@ -1,0 +1,16 @@
+            if (pill.classList.contains("active")) { 
+                filterButtons.forEach((e)=>{
+                    if(e.dataset.genre === ''){
+                        e.classList.add("active")
+                    }
+                });
+                pill.classList.remove("active");
+            }
+            else {
+                filterButtons.forEach((e)=>{
+                if(e.classList.contains("active")){
+                        e.classList.remove("active")
+                    }
+                });
+                pill.classList.add("active");
+            }

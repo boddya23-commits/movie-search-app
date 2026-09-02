@@ -2,16 +2,48 @@
     //  api key
     const key = "917d1f481882207fe7c86b6886f6995d";
 
-    let page = 1 ; 
+    let page = {
+            "":1,
+            "28":1,
+            "35":1,
+            "18":1,
+            "27":1,
+            "878":1,
+            "10749":1,
+    } ; 
     let dropdown = document.querySelector(".dropdown");
     let searchInput = document.querySelector("#input");
 
-
+    let activePill = document.querySelector(".active")
+    let activeGenre = "";
     let movieGrid = document.querySelector(".movies-grid");
     let addMoreButton = document.querySelector(".add-more");
 
-    
-    
+    let filterButtons = document.querySelectorAll(".genre-item") ; 
+    const allButton = document.querySelector('[data-genre=""]');
+
+    filterButtons.forEach((pill)=>{
+        pill.addEventListener("click" , ()=> {
+            if(pill.classList.contains("active") && pill === allButton) {
+                return ; 
+            }
+            page[activeGenre] = 1;
+            if(pill.classList.contains("active") && pill !== allButton) {
+                pill.classList.remove("active");
+                allButton.classList.add("active");
+                activePill = allButton ; 
+                activeGenre = ""
+            }
+            else { 
+                movieGrid.innerHTML='';
+                activePill.classList.remove("active");
+                activePill = pill;
+                activePill.classList.add("active");
+                activeGenre = activePill.dataset.genre ; 
+            }
+            test();
+        });
+    });
     // when user enter text in serach box 
     searchInput.addEventListener("input" ,async ()=>{
         dropdown.innerHTML="";
@@ -102,7 +134,10 @@ let controller = null ;
     }
 
 async function leadMoviesForGrid ()  {
-    let link =`https://api.themoviedb.org/3/movie/popular?api_key=${key}&page=${page}`;
+
+    let link = `https://api.themoviedb.org/3/discover/movie?api_key=${key}&with_genres=${activeGenre}&page=${page[activeGenre]}&sort_by=popularity.desc`;
+    if(activeGenre === "")
+    link =`https://api.themoviedb.org/3/movie/popular?api_key=${key}&page=${page[""]}`;
     try { 
         let response = await fetch (link);
         if (response.ok){
@@ -122,7 +157,7 @@ async function leadMoviesForGrid ()  {
 
 function addMoviesTopage (movies) { 
     
-    if (movies ||movies.length!== 0){
+    if (movies && movies.length!== 0){
         let fragment = document.createDocumentFragment();
         movies.forEach((movie)=>{
 
@@ -148,12 +183,12 @@ function addMoviesTopage (movies) {
             fragment.appendChild(div);
         });
         movieGrid.appendChild(fragment);
-        page ++;
+        page[activeGenre] ++;
     }
 }
 
 async function test () { 
-    let mpovies = await leadMoviesForGrid(page);
+    let mpovies = await leadMoviesForGrid();
     addMoviesTopage(mpovies);
 }
 
