@@ -78,7 +78,7 @@ let controller = null ;
     }
     controller= new AbortController();
     try { 
-        let link = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${query}`
+        let link = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${encodeURIComponent(query)}`
         let response = await fetch(link , {signal : controller.signal});
         if(!response.ok) {
             throw new Error("mistakes");
@@ -89,8 +89,9 @@ let controller = null ;
         }
     }
     catch(error) {
-        console.error("has mustakes");
-        return [];
+    if (error.name !== "AbortError") {
+        console.error(error);
+    }
     }
     }
 
@@ -188,9 +189,9 @@ function addMoviesTopage (movies) {
 }
 
 async function test () { 
-    let mpovies = await leadMoviesForGrid();
-    addMoviesTopage(mpovies);
+    let movies = await leadMoviesForGrid();
+    addMoviesTopage(movies);
 }
 
 
-// https://api.themoviedb.org/3/movie/{movie_id}?api_key=YOUR_API_KEY
+
