@@ -115,6 +115,7 @@ let controller = null ;
 
                 let  div = document.createElement("div");
                 div.classList.add("result")
+                div.id= e.id;
 
                 let posterImg = document.createElement("img");
                 posterImg.src = poster ; 

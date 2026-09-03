@@ -58,6 +58,8 @@
     --space-xl: 32px;
     --space-2xl: 48px;
     --space-3xl: 56px;
+
+    --poster-height:500px ; 
 }
 * {
     padding: 0;
@@ -113,6 +115,138 @@ header ul {
             }
     }
 
+.hero {
+    padding: 20px 0 ;
+    border-bottom: 1px solid var(--border-color);
+}
+.hero-container{
+    display: grid;
+    grid-template-columns: auto  1fr;
+    gap: 20px;
+}
+.hero .poster-and-trial img {
+height: var(--poster-height);
+margin-bottom: 5px;
+}
+
+
+.hero .poster-and-trial .watch-later {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.hero .poster-and-trial .watch-later:hover {
+        background-color: var(--accent-tint);
+    border-color: var(--accent);
+    color: var(--text-primary);
+}
+.hero .poster-and-trial h3 { 
+    font-weight: 400;
+}
+.hero .poster-and-trial i {
+    font-size: 20px;
+}
+.content { 
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+
+}
+.meta ,
+.people-rating{
+    color: var(--text-tertiary);
+    font-size: 14px;
+}
+.content .rating {
+    display: flex;
+    gap: 10px;
+    color: var(--text-secondary);
+    align-items: center;
+}
+.content .rating .rating-number-container .the-rate ,
+.stars-rating 
+{
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--accent);
+}
+.stars-rating  {
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.content .genres span{
+    margin-right: 5px;
+    padding: 4px 8px;
+    border: 1px solid var(--accent);
+    border-radius: 5px;
+    color: var(--accent);
+    font-weight: 400;
+    font-size: 14px;
+}
+.content .overview { 
+    max-width: 600px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.content .movie-actions span{
+    margin-right: 5px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.content .movie-actions span:hover{
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.casts { 
+    padding: 20px 0 ;
+}
+.cards {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit ,minmax(178px , 1fr));
+    gap: 15px;
+}
+
+.card-cast { 
+    background-color: var(--card-surface);
+    padding: 10px;
+    height: auto;
+    border-radius: 15px;
+}
+.card-cast img {
+    width: 100% ;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+.card-cast .cast-name{
+    padding: 10px 0;
+    font-size: 17px;
+}
+.card-cast .character {
+    font-size: 12px;
+    color:  var(--text-tertiary);
+}
+
+
+
+
 @media (max-width: 1439px) {
   :root {
     --grid-cols: 5;
@@ -136,24 +270,37 @@ header ul {
 
 @media (max-width: 767px) {
   :root {
-    --grid-cols: 2;
-    --page-gutter: 20px;
-    --grid-gap-x: 16px;
-    --search-input-w : 530px ; 
+    --page-gutter: 20px; 
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 650px) {
   :root {
     --grid-cols: 2;
     --page-gutter: 20px;
     --grid-gap-x: 16px;
     --search-input-w : 280px ; 
   }
-  .filter-row .container ul.pills {
-    overflow-x: auto;
-  }
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+        gap: 20px;
 }
-@media (max-width: 300px) {
+.hero .poster-and-trial img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+.logo {
+    font-size: 24px;
+}
+header ul {
+    gap: 20px;
+}
+.cards {
+    grid-template-columns: repeat(auto-fit ,minmax(120px , 1fr));
+}
+}
+@media (max-width: 320px) {
   :root {
     --grid-cols: 1;
     --page-gutter: 20px;
@@ -163,4 +310,33 @@ header ul {
   .filter-row .container ul.pills {
     overflow-x: auto;
   }
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+        gap: 20px;
+}
+.hero .poster-and-trial img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 5px;
+}
+.logo {
+    font-size: 24px;
+}
+header ul {
+    gap: 10px;
+}
+header ul {
+    & li {
+        a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 12px;
+            font-weight: 400;
+        }
+    }
+}
+.cards {
+    grid-template-columns: repeat(auto-fit ,minmax(120px , 1fr));
+}
 }
