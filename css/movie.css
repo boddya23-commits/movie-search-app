@@ -181,7 +181,12 @@ margin-bottom: 5px;
     font-size: 20px;
     margin-left: 15px;
 }
+.genres {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 
+}
 .content .genres span{
     margin-right: 5px;
     padding: 4px 8px;

@@ -127,6 +127,9 @@ let controller = null ;
                 let movieYear = document.createElement("div");
                 movieYear.classList.add("years");
                 movieYear.innerText = `(${years})`;
+            div.addEventListener("click" , ()=> {
+                goToRatingPage(id)
+            });
                 
                 div.append(posterImg, movieName, movieYear);
                 fragment.appendChild(div);
@@ -183,6 +186,10 @@ function addMoviesTopage (movies) {
             movieName.classList.add("movie-name");
             div.append(movieCard, movieName);
             fragment.appendChild(div);
+
+                        div.addEventListener("click" , ()=> {
+                goToRatingPage(id);
+            });
         });
         movieGrid.appendChild(fragment);
         page[activeGenre] ++;
@@ -194,5 +201,8 @@ async function test () {
     addMoviesTopage(movies);
 }
 
+function goToRatingPage(id) {
+    window.location.href = `movie.html?id=${id}`;
+}
 
 
