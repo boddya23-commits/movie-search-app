@@ -6,7 +6,7 @@ const movieId = urlParams.get("id")??497;
 
 
 const key = "917d1f481882207fe7c86b6886f6995d";
-const link = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&append_to_response=credits`;
+const link = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${key}&append_to_response=credits,videos`;
 
 let poster = document.querySelector(".poster-and-trial img");
 let movieTitle = document.querySelector(".movie-name");
@@ -17,6 +17,8 @@ let peopleRating = document.querySelector(".people-rating");
 let genresContinar = document.querySelector(".genres");
 let overview = document.querySelector(".overview");
 let castCards = document.querySelector(".cards");
+    let trailerBtn = document.querySelector("#watch-trial"); 
+
 
 
 async function getInformation() {
@@ -49,6 +51,24 @@ function addInfoToPage(info) {
     const overviewAPI = info.overview || "No description available.";
     let casts = info.credits ? info.credits.cast : []; 
 
+const videos = info.videos ? info.videos.results : [];
+const trailer = videos.find(video => video.type === "Trailer" && video.site === "YouTube") || videos[0];
+
+if (trailerBtn) {
+    if (trailer) {
+        trailerBtn.style.opacity = "1";
+        trailerBtn.style.cursor = "pointer";
+        trailerBtn.onclick = () => {
+            window.open(`https://www.youtube.com/watch?v=${trailer.key}`, "_blank");
+            console.log(trailer);
+        };
+    } else {
+        trailerBtn.style.opacity = "0.5";
+        trailerBtn.style.cursor = "not-allowed";
+        trailerBtn.onclick = null;
+    }
+}
+    
     poster.src = posterFilm;
     movieTitle.textContent = name;
     meta.textContent = `${year} • ${runtimeText}`;
@@ -104,6 +124,8 @@ for (let i = 1; i <= 5; i++) {
     });
 
     castCards.appendChild(fragment);
+
+
 }
 
 getInformation().then(data => {
